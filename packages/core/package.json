@@ -6,6 +6,9 @@
   "author": "Dok6n",
   "license": "MIT",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [],
   "type": "commonjs",
   "main": "./dist/cjs/index.js",
