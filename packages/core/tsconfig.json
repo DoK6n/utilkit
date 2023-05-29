@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "target": "es2022",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "outDir": "./dist/cjs",
+    "declaration": true,
+    "composite": true
+  },
+  "reflection": true,
+  "include": ["src/**/*", "index.ts"],
+  "exclude": [
+    "*.config.js",
+    "packages/**/node_modules/*.d.ts",
+    "node_modules/*.d.ts",
+    "**/dist/**/*"
+  ],
+  "references": []
+}
