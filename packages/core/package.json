@@ -2,7 +2,7 @@
   "name": "@utilkit/core",
   "description": "Utilkit core library",
   "repository": "https://github.com/DoK6n/utilkit/packages/core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Dok6n",
   "license": "MIT",
   "private": false,
@@ -24,7 +24,9 @@
   "sideEffects": false,
   "scripts": {
     "test": "jest",
-    "build": "tsc --build tsconfig.json && tsc --build tsconfig.esm.json"
+    "build": "tsc --build tsconfig.json && tsc --build tsconfig.esm.json",
+    "publish": "pnpm build && pnpm publish",
+    "pack:test": "npmp build && pnpm pack"
   },
   "engines": {
     "node": ">=18.x"
