@@ -28,7 +28,10 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
+  .logo.react.loading {
+    animation: logo-spin infinite 1.5s linear;
+  }
+  .logo.react {
     animation: logo-spin infinite 20s linear;
   }
 }

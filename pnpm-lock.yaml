@@ -65,9 +65,6 @@ importers:
 
   examples/vite-react-js:
     dependencies:
-      '@utilkit/core':
-        specifier: ^1.1.0
-        version: link:../../packages/core
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -102,12 +99,6 @@ importers:
 
   examples/vite-react-ts:
     dependencies:
-      '@utilkit/core':
-        specifier: ^1.1.0
-        version: link:../../packages/core
-      '@utilkit/react':
-        specifier: ^0.0.1
-        version: link:../../packages/react
       react:
         specifier: ^18.2.0
         version: 18.2.0

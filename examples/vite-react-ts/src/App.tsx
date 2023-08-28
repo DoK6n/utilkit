@@ -2,8 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { readonly } from '@utilkit/core'
-import { useFetch } from '@utilkit/react'
+import { readonly } from '../../../packages/core'
+import { useFetch } from '../../../packages/react'
 
 interface Todo {
   id: number
@@ -13,13 +13,9 @@ interface Todo {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  // const data = { a: 1, b: { c: [1, 2, 3] } }
-
-  // const readonlyData = readonly(data)
-
-  // readonlyData.a = 1;
+  const obj = { a: 1, b: { c: [1, 2, 3] } }
+  const readonlyObj = readonly(obj)
+  // readonlyObj.a = 1
 
   const sleep = (sec: number) => new Promise((resolve) => setTimeout(resolve, sec * 1000))
 
@@ -64,17 +60,28 @@ function App() {
       <h1>Vite + React</h1>
       <div className='card'>
         <button onClick={() => mutate()}>Refetch</button>
-        <div style={{ display: 'flex', gap: '2rem' }}>
-          <input type='checkbox' checked={data?.completed} disabled />
-          <p className='read-the-docs'>id: {data?.id}</p>
-          <p className='read-the-docs'>usrId: {data?.userId}</p>
-        </div>
-        <p>
-          <b>title:</b> {data?.title}
-        </p>
+        <hr />
+        <Show when={data}>
+          <div style={{ display: 'flex', gap: '2rem' }}>
+            <input type='checkbox' checked={data?.completed} disabled />
+            <p className='read-the-docs'>id: {data?.id}</p>
+            <p className='read-the-docs'>usrId: {data?.userId}</p>
+          </div>
+          <p>
+            <b>title:</b> {data?.title}
+          </p>
+        </Show>
       </div>
     </>
   )
 }
+
+interface ShowProps {
+  when: unknown
+  fallback?: React.ReactNode | null
+  children?: React.ReactNode
+}
+
+const Show = ({ when, fallback = null, children }: ShowProps) => (when ? children : fallback)
 
 export default App
