@@ -3,7 +3,7 @@
 dist
 node_modules/
 npm-debug.log
-packages/**/lib
+# packages/**/lib
 packages/**/.next
 storybook-static
 packages/**/coverage

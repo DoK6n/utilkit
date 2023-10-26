@@ -10,6 +10,7 @@
   "main": "index.js",
   "scripts": {
     "core": "pnpm --filter @utilkit/core",
+    "react": "pnpm --filter @utilkit/react",
     "build": "tsc --build tsconfig.json && tsc --build tsconfig.esm.json"
   },
   "devDependencies": {

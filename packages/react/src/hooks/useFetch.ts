@@ -46,10 +46,11 @@ interface Option<Data> {
 }
 
 /**
- * @example
+ * ```ts
  * const { data, error, isLoading, mutate } = useFetch<Todo>(() =>
  *  fetch('https://jsonplaceholder.typicode.com/todos/1').then((res) => res.json()),
  * )
+ * ```
  */
 export function useFetch<Data = unknown>(
   fetcher: () => Promise<Data>,

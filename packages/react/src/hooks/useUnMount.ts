@@ -1,16 +1,21 @@
-import { useEffect } from 'react'
-import { Callback } from '../types/types'
+import { isFunction } from './../utils/validataionUtils'
+import { useEffect, useRef } from 'react'
+import { Callback } from '../types'
 
 /**
- * useUnMount hook
- * @description Calls a function on unmount
+ * Calls a function on unmount
  */
 export const useUnMount = (callback: Callback) => {
+  const isUnMounted = useRef<boolean>(false)
+
   useEffect(() => {
     return () => {
-      if (typeof callback === 'function') {
-        callback()
+      if (isUnMounted.current) {
+        if (isFunction(callback)) {
+          callback()
+        }
       }
+      isUnMounted.current = true
     }
   }, [])
 }

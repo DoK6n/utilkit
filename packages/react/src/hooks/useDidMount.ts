@@ -1,14 +1,19 @@
-import { useEffect } from 'react'
-import { Callback } from '../types/types'
+import { useRef, useEffect } from 'react'
+import { Callback } from '../types'
+import { isFunction } from 'src/utils/validataionUtils'
 
 /**
- * useDidMount hook
- * @description Calls a function on mount
+ * Calls a function on mount
  */
 export const useDidMount = (callback: Callback) => {
+  const isMounted = useRef<boolean>(false)
+
   useEffect(() => {
-    if (typeof callback === 'function') {
-      callback()
+    if (isMounted.current) {
+      if (isFunction(callback)) {
+        callback()
+      }
     }
+    isMounted.current = true
   }, [])
 }
