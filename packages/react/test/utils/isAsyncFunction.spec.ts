@@ -9,4 +9,8 @@ describe('isAsyncFunction', () => {
   it('should return false for non-async function', () => {
     expect(isAsyncFunction(() => {})).toBe(false)
   })
+
+  it('should return false for primise', () => {
+    expect(isAsyncFunction(new Promise(() => {}))).toBe(false)
+  })
 })
