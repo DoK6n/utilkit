@@ -1,0 +1,71 @@
+{
+  "name": "@utilkit/fetch-client",
+  "description": "Utilkit fetch based HTTP Client. axios like",
+  "repository": "https://github.com/DoK6n/utilkit",
+  "version": "0.1.0",
+  "author": "Dok6n",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "HTTP Client",
+    "fetch",
+    "NextJS",
+    "App Router",
+    "Axios"
+  ],
+  "type": "commonjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/cjs/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "test": "jest",
+    "build": "tsc --build tsconfig.json && tsc --build tsconfig.esm.json",
+    "publish": "pnpm build && pnpm publish",
+    "pack:test": "pnpm build && pnpm pack"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "peerDependencies": {
+    "qs": "^6.11.2"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "@types/jest": "^29.5.1",
+    "@types/qs": "^6.9.9",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.2.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "qs": "^6.11.2"
+  }
+}
