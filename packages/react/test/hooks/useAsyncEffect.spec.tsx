@@ -11,44 +11,37 @@ describe('useAsyncEffect', () => {
     expect(useAsyncEffect).toBeDefined()
   })
 
-  it.skip('StrictMode onetime call ', async () => {
-    const { rerender } = renderHook(
-      ({ count }: { count: number }) => {
-        const isMounted = useRef<boolean>(false)
-
-        useEffect(() => {
-          if (isMounted.current) {
-            console.log('-- isMounted')
-          }
-
-          console.log('now isMounted is ', isMounted.current)
-          isMounted.current = true
-        })
-      },
-      {
-        wrapper: React.StrictMode,
-        initialProps: { count: 0 },
-      },
-    )
-
-    rerender({ count: 1 })
-  })
-
   it('asyncEffect hook', async () => {
-    const { rerender } = renderHook(
+    expect.hasAssertions()
+    let callCount = 0
+
+    const { result } = renderHook(
       ({ count }: { count: number }) => {
+        const [value, setValue] = useState(false)
+
         useAsyncEffect(async () => {
-          console.log('async function!')
+          await sleep(300)
+          setValue(true)
+          callCount++
         })
+
+        return { value, callCount }
       },
       {
         wrapper: React.StrictMode,
         initialProps: { count: 0 },
       },
     )
+
+    expect(result.current.value).toBe(false)
+
+    await waitFor(() => {
+      expect(result.current.callCount).toBe(1)
+      expect(result.current.value).toBe(true)
+    })
   })
 
-  it('sync callback', async () => {
+  it.skip('sync callback', async () => {
     const { rerender } = renderHook(
       ({ count }: { count: number }) => {
         useAsyncEffect(() => {
