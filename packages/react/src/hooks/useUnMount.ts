@@ -10,9 +10,15 @@ export const useUnMount = (callback: Callback) => {
 
   useEffect(() => {
     return () => {
-      if (isUnMounted.current) {
+      if (process.env.NODE_ENV === 'production') {
         if (isFunction(callback)) {
           callback()
+        }
+      } else {
+        if (isUnMounted.current) {
+          if (isFunction(callback)) {
+            callback()
+          }
         }
       }
       isUnMounted.current = true

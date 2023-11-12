@@ -5,33 +5,41 @@ import { isAsync, isFunction } from '../utils/validataionUtils'
 type EffectCleanup = () => void
 type MaybeEffectCleanup = Maybe<EffectCleanup>
 
-type AsyncEffectCallback = () => Promise<MaybeEffectCleanup>
+type AsyncEffectCallback = () => Promise<MaybeEffectCleanup | void> | MaybeEffectCleanup | void
 
 export const useAsyncEffect = (callback: AsyncEffectCallback, deps: DependencyList = []) => {
   const isMounted = useRef<boolean>(false)
 
   useEffect(() => {
-    if (isMounted.current) {
-      if (!isAsync(callback)) {
-        isFunction(callback) && callback()
+    let cleanup: MaybeEffectCleanup = null
+
+    // when callback is syncFunction
+    if (isMounted.current && !isAsync(callback)) {
+      const result = callback()
+      if (isFunction(callback)) {
+        cleanup = result as MaybeEffectCleanup
+        return () => {
+          cleanup?.()
+        }
       }
     }
-    let cleanupFunction: MaybeEffectCleanup = null
 
+    // when callback is AsyncFunction
     const effect = async () => {
       const result = await callback()
-      cleanupFunction = isFunction(result) ? result : null
+      if (isFunction(result)) {
+        cleanup = result
+      }
     }
 
-    if (isMounted.current) {
+    if (isMounted.current && isAsync(callback)) {
       effect()
     }
+
     isMounted.current = true
 
     return () => {
-      if (cleanupFunction) {
-        cleanupFunction()
-      }
+      cleanup?.()
     }
   }, deps)
 }
